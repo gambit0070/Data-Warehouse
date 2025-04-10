@@ -1,3 +1,18 @@
+-- DROP ALL TABLES
+DROP TABLE IF EXISTS population_fact;
+DROP TABLE IF EXISTS fatalities_fact;
+DROP TABLE IF EXISTS location_dim;
+DROP TABLE IF EXISTS date_dim;
+DROP TABLE IF EXISTS rush_dim;
+DROP TABLE IF EXISTS age_dim;
+DROP TABLE IF EXISTS daytime_dim;
+DROP TABLE IF EXISTS road_type_dim;
+DROP TABLE IF EXISTS speed_limit_dim;
+DROP TABLE IF EXISTS holiday_dim;
+DROP TABLE IF EXISTS vehicle_type_dim;
+DROP TABLE IF EXISTS population_fact;
+DROP TABLE IF EXISTS fatalities_fact;
+
 -- create dimension location_dim
 CREATE TABLE IF NOT EXISTS location_dim (
     lga_code INT PRIMARY KEY,
@@ -54,8 +69,21 @@ CREATE TABLE IF NOT EXISTS vehicle_type_dim (
     vehicle_type_involved VARCHAR(50)
 );
 
--- create fact table fatalities_df
-CREATE TABLE IF NOT EXISTS fatalities_df(
+-- create population fact table
+CREATE TABLE IF NOT EXISTS population_fact (
+    lga_code INT,
+    year INT,
+    population INT,
+    -- foreign keys
+    FOREIGN KEY (lga_code) REFERENCES location_dim(lga_code),
+    -- primary key
+    PRIMARY KEY (lga_code, year)
+
+
+);
+
+-- create fatalities fact table 
+CREATE TABLE IF NOT EXISTS fatalities_fact(
     crash_ID INT,
     victim_number INT,
     lga_code INT,
