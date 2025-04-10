@@ -1,10 +1,10 @@
 ### SQL-queries
 
 1. Какая смертность на 1000 человек от ДТП в Перте за последние 10 лет
-2. Количество ДТП в Перте в RUSH ours c участием Heavy vihicle
-3. Количество ДТП в праздники днем и ночью по сравнению с дтп не в праздники.
+2. Количество ДТП по штатам в день и ночь c участием Heavy vehicle
+3. Количество ДТП в праздники по штатам в 2024.
 4. Какая возрастная категория больше попадает в ДТП в RUSH hours.
-5. Для каждого типа дорог узнать на каких скоростных режимах больше дтп.
+5. В 2024 разбивка количества аварий по штатам и скоростным режимам.
 
 1. How do road fatality rates per 1,000 people vary across different geographic levels (State → LGA) and time periods (Year → Month), and where are the highest concentrations of fatalities relative to population?
 
