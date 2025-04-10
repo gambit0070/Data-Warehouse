@@ -60,7 +60,8 @@ CREATE TABLE IF NOT EXISTS speed_limit_dim (
 -- create dimension holiday_dim
 CREATE TABLE IF NOT EXISTS holiday_dim (
     holidayID INT PRIMARY KEY,
-    holiday VARCHAR(50)
+    holiday_type VARCHAR(50),
+    holiday_name VARCHAR(50)
 );
 
 -- create dimension vehicle_type_dim
