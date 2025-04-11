@@ -1067,9 +1067,9 @@ In the process of testing different combinations of parameters and features, we 
 | antecedents                                                  | consequents | confidence  | lift        |
 | ------------------------------------------------------------ | ----------- | ----------- | ----------- |
 | speed_limit_Very High,  vehicle_type_involved_Heavy Vehicle Involved | Driver      | 0.645357986 | 1.429231342 |
-| speed_limit_Very High,  holiday_NoHoliday, vehicle_type_involved_Heavy Vehicle Involved | Driver      | 0.644448906 | 1.427218063 |
-| speed_limit_Very High,  age_group_40_to_64, holiday_NoHoliday, 'road_type_nan | Driver      | 0.621307667 | 1.375968702 |
-| speed_limit_Very High,  holiday_NoHoliday, age_group_26_to_39 | Driver      | 0.620422098 | 1.374007492 |
+| speed_limit_Very High,  holiday_type_NoHoliday, vehicle_type_involved_Heavy Vehicle Involved | Driver      | 0.644448906 | 1.427218063 |
+| speed_limit_Very High,  age_group_40_to_64, holiday_type_NoHoliday, 'road_type_nan | Driver      | 0.621307667 | 1.375968702 |
+| speed_limit_Very High,  holiday_type_NoHoliday, age_group_26_to_39 | Driver      | 0.620422098 | 1.374007492 |
 | speed_limit_Very High,  road_type_nan, age_group_40_to_64    | Driver      | 0.619792498 | 1.372613159 |
 
 #### Rule #1:
@@ -1085,7 +1085,7 @@ Of all records (accidents), approximately 64.5% of the time when the combination
 
 #### Rule #2:
 
-Antecedents: (speed_limit_Very High, holiday_NoHoliday, vehicle_type_involved_Heavy Vehicle Involved)
+Antecedents: (speed_limit_Very High, holiday_type_NoHoliday, vehicle_type_involved_Heavy Vehicle Involved)
 
 Consequents: (Driver)
 
@@ -1096,7 +1096,7 @@ Of all accidents that have the combination of "very high speed limit", "normal (
 
 #### Rule #3:
 
-Antecedents: (speed_limit_Very High, age_group_40_to_64, holiday_NoHoliday, road_type_nan)
+Antecedents: (speed_limit_Very High, age_group_40_to_64, holiday_type_NoHoliday, road_type_nan)
 
 Consequents: (Driver)
 
@@ -1107,7 +1107,7 @@ Of all crashes, approximately 62.1% of the cases where the conditions "very high
 
 #### Rule #4:
 
-Antecedents: (speed_limit_Very High, holiday_NoHoliday, age_group_26_to_39)
+Antecedents: (speed_limit_Very High, holiday_type_NoHoliday, age_group_26_to_39)
 
 Consequents: (Driver)
 

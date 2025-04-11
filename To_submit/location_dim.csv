@@ -1,0 +1,548 @@
+lga_code,state,lga_name
+10050,NSW,Albury
+10180,NSW,Armidale
+10250,NSW,Ballina
+10300,NSW,Balranald
+10470,NSW,Bathurst
+10500,NSW,Bayside (NSW)
+10550,NSW,Bega Valley
+10600,NSW,Bellingen
+10650,NSW,Berrigan
+10750,NSW,Blacktown
+10800,NSW,Bland
+10850,NSW,Blayney
+10900,NSW,Blue Mountains
+10950,NSW,Bogan
+11150,NSW,Bourke
+11200,NSW,Brewarrina
+11250,NSW,Broken Hill
+11300,NSW,Burwood
+11350,NSW,Byron
+11400,NSW,Cabonne
+11450,NSW,Camden
+11500,NSW,Campbelltown (NSW)
+11520,NSW,Canada Bay
+11570,NSW,Canterbury-Bankstown
+11600,NSW,Carrathool
+11650,NSW,Central Coast (NSW)
+11700,NSW,Central Darling
+11720,NSW,Cessnock
+11730,NSW,Clarence Valley
+11750,NSW,Cobar
+11800,NSW,Coffs Harbour
+12000,NSW,Coolamon
+12150,NSW,Coonamble
+12160,NSW,Cootamundra-Gundagai
+12350,NSW,Cowra
+12380,NSW,Cumberland
+12390,NSW,Dubbo
+12700,NSW,Dungog
+12730,NSW,Edward River
+12750,NSW,Eurobodalla
+12850,NSW,Fairfield
+12870,NSW,Federation
+12900,NSW,Forbes
+12930,NSW,Georges River
+12950,NSW,Gilgandra
+13010,NSW,Glen Innes Severn
+13310,NSW,Goulburn Mulwaree
+13340,NSW,Greater Hume
+13450,NSW,Griffith
+13550,NSW,Gunnedah
+13660,NSW,Gwydir
+13800,NSW,Hawkesbury
+13850,NSW,Hay
+13910,NSW,Hilltops
+14000,NSW,Hornsby
+14100,NSW,Hunters Hill
+14170,NSW,Inner West
+14220,NSW,Inverell
+14300,NSW,Junee
+14350,NSW,Kempsey
+14400,NSW,Kiama
+14500,NSW,Ku-ring-gai
+14550,NSW,Kyogle
+14600,NSW,Lachlan
+14650,NSW,Lake Macquarie
+14700,NSW,Lane Cove
+14750,NSW,Leeton
+14850,NSW,Lismore
+14870,NSW,Lithgow
+14900,NSW,Liverpool
+14920,NSW,Liverpool Plains
+14950,NSW,Lockhart
+15050,NSW,Maitland
+15240,NSW,Mid-Coast
+15270,NSW,Mid-Western
+15300,NSW,Moree Plains
+15350,NSW,Mosman
+15520,NSW,Murray River
+15560,NSW,Murrumbidgee
+15650,NSW,Muswellbrook
+15700,NSW,Nambucca Valley
+15750,NSW,Narrabri
+15800,NSW,Narrandera
+15850,NSW,Narromine
+15900,NSW,Newcastle
+15950,NSW,North Sydney
+15990,NSW,Northern Beaches
+16100,NSW,Oberon
+16150,NSW,Orange
+16200,NSW,Parkes
+16260,NSW,Parramatta
+16350,NSW,Penrith
+16380,NSW,Port Macquarie-Hastings
+16400,NSW,Port Stephens
+16490,NSW,Queanbeyan-Palerang
+16550,NSW,Randwick
+16610,NSW,Richmond Valley
+16700,NSW,Ryde
+16900,NSW,Shellharbour
+16950,NSW,Shoalhaven
+17000,NSW,Singleton
+17040,NSW,Snowy Monaro
+17080,NSW,Snowy Valleys
+17100,NSW,Strathfield
+17150,NSW,Sutherland
+17200,NSW,Sydney
+17310,NSW,Tamworth
+17350,NSW,Temora
+17400,NSW,Tenterfield
+17420,NSW,The Hills
+17550,NSW,Tweed
+17620,NSW,Upper Hunter
+17640,NSW,Upper Lachlan
+17650,NSW,Uralla
+17750,NSW,Wagga Wagga
+17850,NSW,Walcha
+17900,NSW,Walgett
+17950,NSW,Warren
+18020,NSW,Warrumbungle
+18050,NSW,Waverley
+18100,NSW,Weddin
+18200,NSW,Wentworth
+18250,NSW,Willoughby
+18350,NSW,Wingecarribee
+18400,NSW,Wollondilly
+18450,NSW,Wollongong
+18500,NSW,Woollahra
+18710,NSW,Yass Valley
+19399,NSW,Unincorporated NSW
+20110,Vic,Alpine
+20260,Vic,Ararat
+20570,Vic,Ballarat
+20660,Vic,Banyule
+20740,Vic,Bass Coast
+20830,Vic,Baw Baw
+20910,Vic,Bayside (Vic.)
+21010,Vic,Benalla
+21110,Vic,Boroondara
+21180,Vic,Brimbank
+21270,Vic,Buloke
+21370,Vic,Campaspe
+21450,Vic,Cardinia
+21610,Vic,Casey
+21670,Vic,Central Goldfields
+21750,Vic,Colac Otway
+21830,Vic,Corangamite
+21890,Vic,Darebin
+22110,Vic,East Gippsland
+22170,Vic,Frankston
+22250,Vic,Gannawarra
+22310,Vic,Glen Eira
+22410,Vic,Glenelg
+22490,Vic,Golden Plains
+22620,Vic,Greater Bendigo
+22670,Vic,Greater Dandenong
+22750,Vic,Greater Geelong
+22830,Vic,Greater Shepparton
+22910,Vic,Hepburn
+22980,Vic,Hindmarsh
+23110,Vic,Hobsons Bay
+23190,Vic,Horsham
+23270,Vic,Hume
+23350,Vic,Indigo
+23430,Vic,Kingston (Vic.)
+23670,Vic,Knox
+23810,Vic,Latrobe (Vic.)
+23940,Vic,Loddon
+24130,Vic,Macedon Ranges
+24210,Vic,Manningham
+24250,Vic,Mansfield
+24330,Vic,Maribyrnong
+24410,Vic,Maroondah
+24600,Vic,Melbourne
+24650,Vic,Melton
+24700,,Merri-bek
+24780,Vic,Mildura
+24850,Vic,Mitchell
+24900,Vic,Moira
+24970,Vic,Monash
+25060,Vic,Moonee Valley
+25150,Vic,Moorabool
+25340,Vic,Mornington Peninsula
+25430,Vic,Mount Alexander
+25490,Vic,Moyne
+25620,Vic,Murrindindi
+25710,Vic,Nillumbik
+25810,Vic,Northern Grampians
+25900,Vic,Port Phillip
+25990,Vic,Pyrenees
+26080,,Queenscliffe
+26170,Vic,South Gippsland
+26260,Vic,Southern Grampians
+26350,Vic,Stonnington
+26430,Vic,Strathbogie
+26490,Vic,Surf Coast
+26610,Vic,Swan Hill
+26670,Vic,Towong
+26700,Vic,Wangaratta
+26730,Vic,Warrnambool
+26810,Vic,Wellington
+26890,Vic,West Wimmera
+26980,Vic,Whitehorse
+27070,Vic,Whittlesea
+27170,Vic,Wodonga
+27260,Vic,Wyndham
+27350,Vic,Yarra
+27450,Vic,Yarra Ranges
+27630,Vic,Yarriambiack
+29399,Vic,Unincorporated Vic
+30250,,Aurukun
+30300,Qld,Balonne
+30370,Qld,Banana
+30410,Qld,Barcaldine
+30450,Qld,Barcoo
+30760,,Blackall Tambo
+30900,,Boulia
+31000,Qld,Brisbane
+31750,Qld,Bulloo
+31820,Qld,Bundaberg
+31900,Qld,Burdekin
+31950,Qld,Burke
+32080,Qld,Cairns
+32250,Qld,Carpentaria
+32260,Qld,Cassowary Coast
+32270,Qld,Central Highlands (Qld)
+32310,Qld,Charters Towers
+32330,,Cherbourg
+32450,Qld,Cloncurry
+32500,Qld,Cook
+32600,Qld,Croydon
+32750,,Diamantina
+32770,Qld,Doomadgee
+32810,Qld,Douglas
+33100,Qld,Etheridge
+33200,Qld,Flinders (Qld)
+33220,Qld,Fraser Coast
+33360,Qld,Gladstone
+33430,Qld,Gold Coast
+33610,Qld,Goondiwindi
+33620,Qld,Gympie
+33800,Qld,Hinchinbrook
+33830,Qld,Hope Vale
+33960,Qld,Ipswich
+33980,Qld,Isaac
+34420,,Kowanyama
+34530,Qld,Livingstone
+34570,Qld,Lockhart River
+34580,Qld,Lockyer Valley
+34590,Qld,Logan
+34710,Qld,Longreach
+34770,Qld,Mackay
+34800,Qld,McKinlay
+34830,,Mapoon
+34860,Qld,Maranoa
+34880,Qld,Mareeba
+35010,Qld,Moreton Bay
+35250,Qld,Mornington
+35300,Qld,Mount Isa
+35600,Qld,Murweh
+35670,,Napranum
+35740,Qld,Noosa
+35760,Qld,North Burnett
+35780,Qld,Northern Peninsula Area
+35790,Qld,Palm Island
+35800,,Paroo
+36070,Qld,Pormpuraaw
+36150,Qld,Quilpie
+36250,Qld,Redland
+36300,Qld,Richmond
+36370,Qld,Rockhampton
+36510,Qld,Scenic Rim
+36580,Qld,Somerset
+36630,Qld,South Burnett
+36660,Qld,Southern Downs
+36720,Qld,Sunshine Coast
+36820,Qld,Tablelands
+36910,Qld,Toowoomba
+36950,,Torres
+36960,,Torres Strait Island
+37010,Qld,Townsville
+37300,Qld,Weipa
+37310,Qld,Western Downs
+37340,Qld,Whitsunday
+37400,,Winton
+37550,,Woorabinda
+37570,,Wujal Wujal
+37600,Qld,Yarrabah
+40070,SA,Adelaide
+40120,SA,Adelaide Hills
+40150,SA,Adelaide Plains
+40220,SA,Alexandrina
+40250,SA,Anangu Pitjantjatjara Yankunytjatjara
+40310,SA,Barossa
+40430,SA,Barunga West
+40520,SA,Berri Barmera
+40700,SA,Burnside
+40910,SA,Campbelltown (SA)
+41010,SA,Ceduna
+41060,SA,Charles Sturt
+41140,SA,Clare and Gilbert Valleys
+41190,SA,Cleve
+41330,SA,Coober Pedy
+41560,SA,Copper Coast
+41750,SA,Elliston
+41830,SA,Flinders Ranges
+41960,SA,Franklin Harbour
+42030,SA,Gawler
+42110,SA,Goyder
+42250,SA,Grant
+42600,SA,Holdfast Bay
+42750,SA,Kangaroo Island
+43080,SA,Karoonda East Murray
+43220,SA,Kimba
+43360,SA,Kingston (SA)
+43650,SA,Light
+43710,SA,Lower Eyre Peninsula
+43790,SA,Loxton Waikerie
+44000,,Maralinga Tjarutja
+44060,SA,Marion
+44210,SA,Mid Murray
+44340,SA,Mitcham
+44550,SA,Mount Barker
+44620,SA,Mount Gambier
+44830,SA,Mount Remarkable
+45040,SA,Murray Bridge
+45090,SA,Naracoorte Lucindale
+45120,SA,Northern Areas
+45290,SA,Norwood Payneham and St Peters
+45340,SA,Onkaparinga
+45400,SA,Orroroo Carrieton
+45540,,Peterborough
+45680,SA,Playford
+45890,SA,Port Adelaide Enfield
+46090,SA,Port Augusta
+46300,SA,Port Lincoln
+46450,SA,Port Pirie
+46510,SA,Prospect
+46670,SA,Renmark Paringa
+46860,SA,Robe
+46970,,Roxby Downs
+47140,SA,Salisbury
+47290,SA,Southern Mallee
+47490,SA,Streaky Bay
+47630,SA,Tatiara
+47700,SA,Tea Tree Gully
+47800,SA,Coorong
+47910,SA,Tumby Bay
+47980,SA,Unley
+48050,SA,Victor Harbor
+48130,SA,Wakefield
+48260,SA,Walkerville
+48340,SA,Wattle Range
+48410,SA,West Torrens
+48540,SA,Whyalla
+48640,SA,Wudinna
+48750,SA,Yankalilla
+48830,SA,Yorke Peninsula
+49399,SA,Unincorporated SA
+50080,WA,Albany
+50210,WA,Armadale
+50250,WA,Ashburton
+50280,WA,Augusta Margaret River
+50350,WA,Bassendean
+50420,WA,Bayswater
+50490,WA,Belmont
+50560,WA,Beverley
+50630,WA,Boddington
+50770,WA,Boyup Brook
+50840,WA,Bridgetown-Greenbushes
+50910,WA,Brookton
+50980,WA,Broome
+51080,WA,Broomehill-Tambellup
+51120,WA,Bruce Rock
+51190,WA,Bunbury
+51260,WA,Busselton
+51310,WA,Cambridge
+51330,WA,Canning
+51400,WA,Capel
+51470,WA,Carnamah
+51540,WA,Carnarvon
+51610,WA,Chapman Valley
+51680,WA,Chittering
+51710,,Christmas Island
+51750,WA,Claremont
+51820,WA,Cockburn
+51860,,Cocos Islands
+51890,WA,Collie
+51960,WA,Coolgardie
+52030,,Coorow
+52100,WA,Corrigin
+52170,WA,Cottesloe
+52240,WA,Cranbrook
+52310,WA,Cuballing
+52380,WA,Cue
+52450,WA,Cunderdin
+52520,WA,Dalwallinu
+52590,WA,Dandaragan
+52660,WA,Dardanup
+52730,WA,Denmark
+52800,WA,Derby-West Kimberley
+52870,WA,Donnybrook-Balingup
+52940,WA,Dowerin
+53010,WA,Dumbleyung
+53080,WA,Dundas
+53150,,East Fremantle
+53220,WA,East Pilbara
+53290,WA,Esperance
+53360,WA,Exmouth
+53430,WA,Fremantle
+53570,WA,Gingin
+53640,WA,Gnowangerup
+53710,WA,Goomalling
+53780,WA,Gosnells
+53800,WA,Greater Geraldton
+53920,WA,Halls Creek
+53990,WA,Harvey
+54060,WA,Irwin
+54130,WA,Jerramungup
+54170,WA,Joondalup
+54200,WA,Kalamunda
+54280,WA,Kalgoorlie-Boulder
+54310,WA,Karratha
+54340,WA,Katanning
+54410,WA,Kellerberrin
+54480,WA,Kent
+54550,WA,Kojonup
+54620,WA,Kondinin
+54690,,Koorda
+54760,WA,Kulin
+54830,WA,Kwinana
+54900,WA,Lake Grace
+54970,,Laverton
+55040,WA,Leonora
+55110,WA,Mandurah
+55180,WA,Manjimup
+55250,WA,Meekatharra
+55320,WA,Melville
+55390,WA,Menzies
+55460,WA,Merredin
+55530,WA,Mingenew
+55600,WA,Moora
+55670,WA,Morawa
+55740,WA,Mosman Park
+55810,WA,Mount Magnet
+55880,WA,Mount Marshall
+55950,,Mukinbudin
+56090,WA,Mundaring
+56160,,Murchison
+56230,WA,Murray
+56300,WA,Nannup
+56370,,Narembeen
+56460,WA,Narrogin
+56580,WA,Nedlands
+56620,WA,Ngaanyatjarraku
+56730,WA,Northam
+56790,WA,Northampton
+56860,WA,Nungarin
+56930,,Peppermint Grove
+57000,WA,Perenjori
+57080,WA,Perth
+57140,WA,Pingelly
+57210,WA,Plantagenet
+57280,WA,Port Hedland
+57350,WA,Quairading
+57420,WA,Ravensthorpe
+57490,WA,Rockingham
+57630,WA,Sandstone
+57700,WA,Serpentine-Jarrahdale
+57770,WA,Shark Bay
+57840,WA,South Perth
+57910,WA,Stirling
+57980,WA,Subiaco
+58050,WA,Swan
+58190,,Tammin
+58260,,Three Springs
+58330,WA,Toodyay
+58400,WA,Trayning
+58470,,Upper Gascoyne
+58510,WA,Victoria Park
+58540,WA,Victoria Plains
+58570,WA,Vincent
+58610,WA,Wagin
+58680,WA,Wandering
+58760,WA,Wanneroo
+58820,WA,Waroona
+58890,WA,West Arthur
+59030,WA,Westonia
+59100,WA,Wickepin
+59170,WA,Williams
+59250,,Wiluna
+59310,WA,Wongan-Ballidu
+59320,WA,Woodanilling
+59330,,Wyalkatchem
+59340,WA,Wyndham-East Kimberley
+59350,,Yalgoo
+59360,WA,Yilgarn
+59370,WA,York
+60210,Tas,Break O`Day
+60410,Tas,Brighton
+60610,Tas,Burnie
+60810,Tas,Central Coast (Tas.)
+61010,Tas,Central Highlands (Tas.)
+61210,Tas,Circular Head
+61410,Tas,Clarence
+61510,Tas,Derwent Valley
+61610,Tas,Devonport
+61810,Tas,Dorset
+62010,Tas,Flinders (Tas.)
+62210,Tas,George Town
+62410,Tas,Glamorgan-Spring Bay
+62610,Tas,Glenorchy
+62810,Tas,Hobart
+63010,Tas,Huon Valley
+63210,Tas,Kentish
+63410,Tas,King Island
+63610,Tas,Kingborough
+63810,Tas,Latrobe (Tas.)
+64010,Tas,Launceston
+64210,Tas,Meander Valley
+64610,Tas,Northern Midlands
+64810,Tas,Sorell
+65010,Tas,Southern Midlands
+65210,Tas,Tasman
+65410,Tas,Waratah-Wynyard
+65610,Tas,West Coast
+65810,Tas,West Tamar
+70200,NT,Alice Springs
+70420,NT,Barkly
+70540,,Belyuen
+70620,NT,Central Desert
+70700,NT,Coomalie
+71000,NT,Darwin
+71150,,Darwin Waterfront Precinct
+71300,NT,East Arnhem
+72200,NT,Katherine
+72300,NT,Litchfield
+72330,NT,MacDonnell
+72800,NT,Palmerston
+73600,NT,Roper Gulf
+74050,,Tiwi Islands
+74550,NT,Victoria Daly
+74560,NT,Wagait
+74660,NT,West Arnhem
+74680,NT,West Daly
+79399,NT,Unincorporated NT
+89399,ACT,Unincorporated ACT
+99399,,Unincorp. Other Territories

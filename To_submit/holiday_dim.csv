@@ -1,0 +1,4 @@
+holidayID,holiday_type,holiday_name
+1,Holiday,Christmas
+2,Holiday,Easter
+3,NoHoliday,NoHoliday
