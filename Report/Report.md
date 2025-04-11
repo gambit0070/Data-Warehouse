@@ -142,7 +142,7 @@ Concept Hierarchy - Vehicle invoved
 
 ### Schema, Starnet and query footprints
 
-Schema shows the relationships between fact tables and dimension tables. For example, both fact tables have one common dimension table - location dimension table.
+Data warehouse schema shows schema of fact and dimension tables along with relationships between them. For example, both fact tables have one common dimension table - location dimension table. 
 
 ![ Schema](/Users/Kirill/Documents/GitHub/Data-Warehouse/Schema/ Schema.png)
 
