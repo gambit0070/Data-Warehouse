@@ -807,13 +807,6 @@ NOTE: During the ETL process, you may remove some rows from the dataset. However
 
 ## Visualisation
 
-**Visual**
-Use PostgreSQL to build a multi-dimensional analysis service solution, with a cube designed to answer your business queries. Make sure the concept hierarchies match your StarNet design.
-
-Use Power BI/Tableau to visualise the data returned from your business queries.
-
-**Visualisation of query results**: Present the findings from your business queries using appropriate charts, graphs, and other visualisations. Ensure the insights are clearly communicated and easily understandable to stakeholders.
-
 ### 1.
 
 ```
@@ -887,8 +880,6 @@ This graph shows the mortality rate from road accidents in different states in 2
 
 ## Association rules mining
 
-**Association rules mining**: See the Association Rules Mining section above. 
-
 ### 1.Explaination and discussion which association rules mining algorithms were used.
 
 | Algorithm Name | Pros                                                         | Cons                                                         |
@@ -914,7 +905,7 @@ Li, H., Wang, Y., Zhang, D., Zhang, M., & Chang, E. Y. (2008, October). Pfp: par
 
 
 
-First, you need to prepare a binary matrix for the algorithms. The column is divided into columns of dummy variables so that each column has its own binary column for each of the feature values. However, we decided not to take all the columns for this, since they seemed insignificant to us compared to how much they load the calculations. According to this principle, we did not take into account the features year, month, lga_name. The final dataset included the columns:
+First, we need to prepare a binary matrix for the algorithms. The column is divided into columns of dummy variables so that each column has its own binary column for each of the feature values. However, we decided not to take all the columns for this, since they seemed insignificant to us compared to how much they load the calculations. According to this principle, we did not take into account the features year, month, lga_name. The final dataset included the columns:
 
 ```
 state','speed_limit','holiday','time_of_day','time_cat','road_user','vehicle_type_involved','road_type',
@@ -923,7 +914,9 @@ state','speed_limit','holiday','time_of_day','time_cat','road_user','vehicle_typ
 
 Our final matrix included:
 
-
+```
+[56874 rows x 48 columns]
+```
 
 In our data study, we decided to initially try two algorithms and decide based on the results which one suits us best. Both algorithms are implemented through the `mlxtend.frequent_patterns module`.
 
@@ -1033,7 +1026,7 @@ Consequents: (Driver)
 Confidence: 64.5%, Lift: 1.43
 
 Interpretation:
-Of all records (accidents), approximately 64.5% of the time when the combination of "very high speed limit" and "heavy vehicle involved" is recorded, the driver is involved. Since lift = 1.43 (> 1), the presence of "very high speed" and "heavy vehicle" increases the probability of driver involvement by 43% compared to random distribution.
+Of all records (accidents), approximately 64.5% of the time when the combination of "very high speed limit" and "heavy vehicle involved" is recorded, the victim is a driver. Since lift = 1.43 (> 1), the presence of "very high speed" and "heavy vehicle" increases the probability of driver involvement by 43% compared to random distribution.
 
 #### Rule #2:
 
@@ -1076,5 +1069,22 @@ Consequents: (Driver)
 
 Confidence: 61.9%, Lift: 1.37
 
-Interpretation:
+### 4.Insights and explanation the reasons for our outcome.
+
 In crashes where the combination of "very high speed limit", "road type not specified (omitted)" and "age group from 40 to 64 years" is present, approximately 61.9% of the time the driver is involved. Lift = 1.37 (> 1) shows that this combination increases the probability of driver involvement by 37% relative to the overall probability.
+
+Very High speed limit is one of the most significant factors associated with fatal accidents of drivers. Almost all rules with high lift and confidence include this feature. This suggests that high speeds are one of the main reasons for most fatal accidents for drivers.
+
+It is a logical observation that the age group (26-64) is often encountered. However, this is logical because in the population section this age group is the most common in Australia. This age is especially often involved in fatal accidents in combination with heavy transport.
+
+Holidays are not a risk factor in these rules since the most significant rules concern non-holidays. As a result, holiday trips do not entail an increased likelihood of getting into an accident for the main group of drivers.
+
+The participation of heavy transport is an important feature. If it is present, the probability of the driver's participation in an accident is significantly higher. This may reflect accidents in the city with trucks and buses, as well as accidents with logistics transport on intercity routes.
+
+The missing road type (road_type_nan) is often found in the rules. This is caused by incomplete data and frequent omissions in this column over the years. This could be eliminated by filtering all omissions or even completely deleting rows with omissions, but then we would have a chance to encounter data distortion and incorrect representation.
+
+### 5.Recommendations to the government.
+
+1. The first recommendation is to introduce stricter control and penalties for speeding. It is also important to design and modify the existing structure to modern standards, taking into account the practices of implicit speed control and the installation of protective barriers on roads where drivers can potentially exceed the speed limit. Particular attention to speeding drivers should be introduced in the states of NSW and VIC
+2. Improve the overall safety of roads inside the city by creating separate lanes for buses, redirecting the flow of trucks to bypass the city if possible. And also widening intercity roads to reduce the number of accidents when car drivers try to overtake slow trucks by driving into the oncoming lane on narrow roads.
+3. Although the top 5 rules did not include the reason for night trips, further down the list you can find a large number of important rules indicating the problem of night roads as one of the key factors of mortality for drivers. To correct this situation, it is necessary to improve night markings and road lighting. It is even possible to introduce control over the brightness of headlights on cars during regular technical inspections in order to prevent situations when too bright headlights blind all drivers in front of them and vice versa when too dim headlights do not provide sufficient visibility. Particular attention should be paid to this problem in the state of NT.
