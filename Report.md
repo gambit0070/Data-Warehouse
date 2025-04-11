@@ -1,8 +1,10 @@
+
+
 # Project 1 - Data Warehouse Design
 
 Project 1 submitted by 
 Butakov Kirill, Student ID: 24620697 
-Dmitry Prytkov__, Student ID: 24069389.
+Dmitry Prytkov, Student ID: 24069389.
 
 Member Contribution: 50% each.
 
@@ -812,8 +814,267 @@ Use Power BI/Tableau to visualise the data returned from your business queries.
 
 **Visualisation of query results**: Present the findings from your business queries using appropriate charts, graphs, and other visualisations. Ensure the insights are clearly communicated and easily understandable to stakeholders.
 
+### 1.
+
+```
+```
+
+
+
+![1querry](https://github.com/gambit0070/Data-Warehouse/blob/main/Screenshots/PB1.png?raw=true)
+
+As you can see on this line graph, the distribution of fatal road accident incidents by state by year is presented here. The first lines in the number of deaths at the beginning are occupied by NSW, Vic, WA, which is logical since these are some of the most populated states in Australia, however, the state of Qld, which will take 3rd place in the future, has not yet kept statistics on road accidents. At the end of the dataset, the lines are logically distributed between the three largest states in Australia NSW, Qld and Vic. In the period between 2019 and 2021, when the pandemic occurred, an interesting situation is observed when in the leading state in terms of the number of deaths NSW this figure fell by almost 25%, while in Qld this figure, on the contrary, increased by 20%.
+
+### 2.
+
+```
+```
+
+
+
+![](https://github.com/gambit0070/Data-Warehouse/blob/main/Screenshots/PB2.png?raw=true)
+
+This geographic map of Australia overlays pie charts showing the distribution of road accidents during the day and at night in different states. In general, the ratio between day and night time is the same in most states. However, in the state of Vic, there is a slight increase in the share of night accidents, while in the state of NT, there is an anomalous situation when, on the contrary, there are much more night accidents than daytime ones, which is not observed anywhere else, which may indicate a special situation or large structural differences from other states.
+
+### 3.
+
+```
+```
+
+
+
+![](https://github.com/gambit0070/Data-Warehouse/blob/main/Screenshots/PB3.png?raw=true)
+
+This graph shows the relative shares of accidents on weekdays and holidays (Christmas, Easter) in different states in 2024. Some states have good normal shares when there are much fewer people killed on holidays than on weekdays. In other states NT, WA, SA, TA, ACT, due to the small number of accidents, there are distorted statistics where there were never any accidents before the strong increase in the share of holidays.
+
+### 4.
+
+```
+```
+
+
+
+![](https://github.com/gambit0070/Data-Warehouse/blob/main/Screenshots/PB4.png?raw=true)
+
+This chart shows different age groups and how often they get into accidents during rush hour.
+Overall, people aged 0 to 16 and 65 and older get into accidents during rush hour on average 20% of the time. While people aged 17 to 64 have a chance of getting into an accident during rush hour of about 14%.
+
+### 5.
+
+```
+```
+
+
+
+![](https://github.com/gambit0070/Data-Warehouse/blob/main/Screenshots/PB5.png?raw=true)
+
+This bar chart shows the number of accidents in different states in 2024 at different speeds. As expected, most fatal accidents occur at high and very high speeds. At the same time, the number of accidents at low and medium speeds (up to 50-60 km / h) make up only a small share of all accidents.
+
+### 6.
+
+```
+```
+
+
+
+![](https://github.com/gambit0070/Data-Warehouse/blob/main/Screenshots/PB6.png?raw=true)
+
+This graph shows the mortality rate from road accidents in different states in 2020, calculated per 100 thousand people. The best indicators are demonstrated by the state of ACT. NSW and Vic have very similar metrics and in general they are better than the national average. At the same time, an abnormal situation is again observed in the state of NT. The road mortality rate in this state is almost 3 times longer than in NSW and Vic and almost twice as much as the state average. This metric may indicate major problems with either road infrastructure or road administrative regulation.
+
+
+
 
 
 ## Association rules mining
 
 **Association rules mining**: See the Association Rules Mining section above. 
+
+### 1.Explaination and discussion which association rules mining algorithms were used.
+
+| Algorithm Name | Pros                                                         | Cons                                                         |
+| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Apriori        | quite easy to understand the process.<br/>Works faster with a large number of columns and high sparseness of data | With a large number of rows, it creates an excessive number of candidates. It works slower than alternatives with a small number of features. |
+| Fp-Growth      | Creates fewer candidates due to the tree construction process itself with a large number of rows. Overall, shows better performance for most datasets | Can slow down significantly with a large number of columns and very sparse data |
+
+#### Apriori:
+
+The main concept in this algorithm that's it iteratively grows frequent itemsets by going through the data many times. First, it looks for frequent 1-itemsets, then 2-items based on the 1-items
+
+#### Fp-Growth:
+
+It builds a prefix tree (FP-tree) for a compressed representation of the data. Then recursively "unwinds" the tree, extracting frequent sets without multiple scans of the entire dataframe.
+
+References:
+
+Ali, M. (2023, January). *Association Rule Mining in Python Tutorial.* datacamp. https://www.datacamp.com/tutorial/association-rule-mining-python
+
+R. Agrawal, R. Srikant. “Fast algorithms for mining association rules.” *Proceedings of the 20th VLDB Conference*, 1994.
+
+Li, H., Wang, Y., Zhang, D., Zhang, M., & Chang, E. Y. (2008, October). Pfp: parallel fp-growth for query recommendation. In *Proceedings of the 2008 ACM conference on Recommender systems*, 107-114.
+
+
+
+First, you need to prepare a binary matrix for the algorithms. The column is divided into columns of dummy variables so that each column has its own binary column for each of the feature values. However, we decided not to take all the columns for this, since they seemed insignificant to us compared to how much they load the calculations. According to this principle, we did not take into account the features year, month, lga_name. The final dataset included the columns:
+
+```
+state','speed_limit','holiday','time_of_day','time_cat','road_user','vehicle_type_involved','road_type',
+'age_group'
+```
+
+Our final matrix included:
+
+
+
+In our data study, we decided to initially try two algorithms and decide based on the results which one suits us best. Both algorithms are implemented through the `mlxtend.frequent_patterns module`.
+
+Before we start implementing the algorithm, we need to decide what level of minimum support we need to use. To do this, we use the simplest filter for all values of the `road_user` feature to find out the distribution of different categories within the group.
+
+```
+encoded_df.filter(like='road_user_').mean()
+```
+
+Our output is:
+
+```
+road_user_Driver                          0.451542
+road_user_Motorcycle pillion passenger    0.006752
+road_user_Motorcycle rider                0.131097
+road_user_Passenger                       0.227134
+road_user_Pedal cyclist                   0.027183
+road_user_Pedestrian                      0.153972
+road_user_nan                             0.002321
+```
+
+As we can see, the most frequent category is Driver, which occurs in almost 45% of all cases. At the same time, other options are much less common. We decided to use 10% as a starting value because if we took more, for example 15~20%, then we would most likely not see any associations for the Motorcycle rider and Pedestrian options, since they would occur in the dataset less often than our minimum support percentage. However, after a series of tests, we settled on a parameter equal to 5%, since with it we do not have a small set of obvious patterns as with 10~15%, but at the same time we do not have a lot of white noise and random patterns as with 0.005~0.03%. With this parameter, we get the golden mean when we do not refuse all rare interesting finds, but at the same time we do not get a large amount of white noise.
+
+```
+min_support = 0.05
+```
+
+For confidence, we decided to start with the standard 50%. Since we did not want to set strict rules right away, and especially if something is observed on a large dataset with a probability of more than 50~60% with a sufficiently high lift, then this already deserves attention, because this finding is already very likely not a simple coincidence and requires attention. Also, for convenience, we rank all the found rules at the end by lift and confidence in descending order, which will still give us the best finds right from the top, but at the same time leave us with the opportunity to see rarer finds with probabilities of 50~70%.
+
+```
+min_confidence = 0.5
+```
+
+Below are examples of how we implemented the Apriori and FP-Growth algorithms in practice.
+
+```
+#Apriori
+min_support = 0.05
+frequent_itemsets_ap = apriori(encoded_df, min_support=min_support, use_colnames=True, low_memory=True)
+#low_memory we used because Its allow process data by chucnks avoiding any Memory overusage crashes 
+
+print("Itemsets")
+print(frequent_itemsets_ap.head())
+
+min_confidence = 0.5
+rules = association_rules(frequent_itemsets_ap, metric="confidence", min_threshold=min_confidence)
+
+filtered_rules_ap = rules[
+    (rules['consequents'].apply(lambda x: len(x) == 1 and next(iter(x)).startswith('road_user_')))
+]
+
+rules = rules.sort_values(by=['lift', 'confidence'], ascending=[False, False])#Just to see other rules for                                                                                 # other categories
+filtered_rules_ap = filtered_rules_ap.sort_values(by=['lift', 'confidence'], ascending=[False, False])
+
+print("\n(Apriori):")
+print(rules.head(5))
+
+print("\n K-5 rules")
+print(filtered_rules_ap.head(5))
+```
+
+```
+#Fp-Growth
+min_support = 0.05
+
+frequent_itemsets_fp = fpgrowth(encoded_df, min_support=min_support, use_colnames=True)
+
+print("Itemsets")
+print(frequent_itemsets_fp.head())
+
+
+min_confidence = 0.5
+rules_fp = association_rules(frequent_itemsets_fp, metric="confidence", min_threshold=min_confidence)
+
+filtered_rules_fp = rules_fp[
+    (rules_fp['consequents'].apply(lambda x: len(x) == 1 and next(iter(x)).startswith('road_user_')))
+]
+
+rules_fp = rules_fp.sort_values(by=['lift', 'confidence'], ascending=[False, False])
+filtered_rules_fp = filtered_rules_fp.sort_values(by=['lift', 'confidence'], ascending=[False, False])
+
+print("\n(Fp-Growth):")
+print(rules_fp.head(5))
+
+print("\n K-5 rules:")
+print(filtered_rules_fp.head(5))
+```
+
+In the process of testing different combinations of parameters and features, we came to a situation in which we had to abandon the Fp-Growth algorithm, since in our conditions it worked much slower than Apriori, despite the fact that the top rules were almost always the same. Due to the greater performance of Apriori, we ultimately based all our answers on it.
+
+### 2-3. The top k rules which we received and explanation the rules meaning
+
+| antecedents                                                  | consequents | confidence  | lift        |
+| ------------------------------------------------------------ | ----------- | ----------- | ----------- |
+| speed_limit_Very High,  vehicle_type_involved_Heavy Vehicle Involved | Driver      | 0.645357986 | 1.429231342 |
+| speed_limit_Very High,  holiday_NoHoliday, vehicle_type_involved_Heavy Vehicle Involved | Driver      | 0.644448906 | 1.427218063 |
+| speed_limit_Very High,  age_group_40_to_64, holiday_NoHoliday, 'road_type_nan | Driver      | 0.621307667 | 1.375968702 |
+| speed_limit_Very High,  holiday_NoHoliday, age_group_26_to_39 | Driver      | 0.620422098 | 1.374007492 |
+| speed_limit_Very High,  road_type_nan, age_group_40_to_64    | Driver      | 0.619792498 | 1.372613159 |
+
+#### Rule #1:
+
+Antecedents: (speed_limit_Very High, vehicle_type_involved_Heavy Vehicle Involved)
+
+Consequents: (Driver)
+
+Confidence: 64.5%, Lift: 1.43
+
+Interpretation:
+Of all records (accidents), approximately 64.5% of the time when the combination of "very high speed limit" and "heavy vehicle involved" is recorded, the driver is involved. Since lift = 1.43 (> 1), the presence of "very high speed" and "heavy vehicle" increases the probability of driver involvement by 43% compared to random distribution.
+
+#### Rule #2:
+
+Antecedents: (speed_limit_Very High, holiday_NoHoliday, vehicle_type_involved_Heavy Vehicle Involved)
+
+Consequents: (Driver)
+
+Confidence: 64.4%, Lift: 1.43
+
+Interpretation:
+Of all accidents that have the combination of "very high speed limit", "normal (non-holiday) day" and "heavy vehicle involved", approximately 64.4% of the time a driver is involved. Since lift = 1.43 (> 1), this means that this combination of conditions increases the probability that the driver will be involved in an accident by 43% compared to typical conditions.
+
+#### Rule #3:
+
+Antecedents: (speed_limit_Very High, age_group_40_to_64, holiday_NoHoliday, road_type_nan)
+
+Consequents: (Driver)
+
+Confidence: 62.1%, Lift: 1.38
+
+Interpretation:
+Of all crashes, approximately 62.1% of the cases where the conditions "very high speed limit", "driver age group 40 to 64", "not a holiday", and "road type not specified (omitted)" are all met involve a driver participant. Since lift = 1.38 (> 1), the presence of this combination of conditions increases the probability of driver involvement by 38% above chance.
+
+#### Rule #4:
+
+Antecedents: (speed_limit_Very High, holiday_NoHoliday, age_group_26_to_39)
+
+Consequents: (Driver)
+
+Confidence: 62.0%, Lift: 1.37
+
+Interpretation:
+When the data contains the conditions "very high speed limit", "not a holiday" and "driver age from 26 to 39 years old", in 62.0% of cases the accidents involve drivers. Lift = 1.37 (> 1), that is, this combination of conditions increases the probability that the driver will be involved in the accident by 37%, compared to the usual situation.
+
+#### Rule #5:
+
+Antecedents: (speed_limit_Very High, road_type_nan, age_group_40_to_64)
+
+Consequents: (Driver)
+
+Confidence: 61.9%, Lift: 1.37
+
+Interpretation:
+In crashes where the combination of "very high speed limit", "road type not specified (omitted)" and "age group from 40 to 64 years" is present, approximately 61.9% of the time the driver is involved. Lift = 1.37 (> 1) shows that this combination increases the probability of driver involvement by 37% relative to the overall probability.
