@@ -14,14 +14,14 @@ SELECT
     l.state,
     l.lga_name,
     COUNT(*) AS total_fatalities,
-    SUM(p.population) AS total_population,
-    ROUND(COUNT(*) * 1000.0 / NULLIF(SUM(p.population), 0), 2) AS fatalities_per_1000
+    MAX(p.population) AS total_population,
+    ROUND(COUNT(*) * 1000.0 / NULLIF(MAX(p.population), 0), 2) AS fatalities_per_1000
 FROM fatalities_fact f
 JOIN date_dim d ON f.dateID = d.dateID
 JOIN location_dim l ON f.lga_code = l.lga_code
 JOIN population_fact p ON f.lga_code = p.lga_code AND d.year = p.year
-GROUP BY ROLLUP (d.year, d.month, l.state, l.lga_name)
-ORDER BY fatalities_per_1000 DESC
+GROUP BY d.year, d.month, l.state, l.lga_name
+ORDER BY fatalities_per_1000 DESC;
 
 
 2. How many road crashes involving heavy vehicles occurred during the day and night across each state?
