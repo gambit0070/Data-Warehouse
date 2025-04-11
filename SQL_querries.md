@@ -76,7 +76,7 @@ WHERE d.year = 2024
 GROUP BY l.state, s.speed_limit
 ORDER BY l.state, total_crashes DESC;
 
-6. Какая смертность на 100000 человек по штатам в 2020 году
+6. What is the road fatality rate per 100,000 people by state in the year 2020?
 
 WITH population_per_state AS (
     SELECT 
