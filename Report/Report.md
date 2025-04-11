@@ -64,7 +64,7 @@ Upon reviewing the data, we can identify several business questions that our dat
 3. How many road crashes occurred during holidays in each state in 2024?
 4. Which age group is most frequently involved in road crashes during rush hours?
 5. How many road crashes occurred at each speed limit in each Australian state during 2024?
-6. What is the road fatality rate per 100,000 people by state in 2020?
+6. What is the road fatality rate per 100,000 people by state in the year 2020?
 
 The capabilities of the designed data warehouse are not limited to these queries alone.
 
@@ -90,13 +90,15 @@ We do not use the following categories for analysis: **'age'**, **'road_user'**,
 
 1. **Age**: Instead of using the exact numeric age values, we categorize individuals into **age groups**. This approach is preferred because using precise age values would significantly increase the size of the dimension table, potentially hindering the efficiency of analysis and insight generation.
 2. **Road User**: The **road user** dimension is not included in the data warehouse because it does not align with the primary business queries. However, it is used in association rule mining, which helps identify patterns in specific types of road users involved in accidents.
-3. **Gender**: The **gender** dimension is excluded from the data warehouse because it does not address the primary business queries. Although it may be relevant in certain detailed analyses, it is not crucial for the broad insights the data warehouse aims to provide.
-4. **SA4 Name 2021, National Remoteness Areas**: The analysis does not focus on geographical remoteness as a primary factor or on the SA4 statistical areas. Instead, we focus on Local Government Areas (**LGA**), which provide a more relevant and manageable level of granularity for the analysis.
-5. **Day of Week**: Rather than focusing on the **day of the week**, we emphasize more general categories such as **holidays**, **weekdays/weekends**, and **rush hours**. These categories are considered to have a more significant impact on the likelihood of accidents and offer more useful insights for road safety analysis.
+3. **Gender**: The **gender** dimension is not included in the data warehouse because it does not align with the primary business queries. 
+4. **SA4 Name 2021, National Remoteness Areas**: The analysis does not focus on geographical remoteness as a primary factor or on the SA4 statistical areas. Instead, we focus on Local Government Areas (**LGA**), which is areas within states.
+5. **Day of Week**: Rather than focusing on the **day of the week**, we choose categories such as **holidays**, **weekdays/weekends**, and **rush hours**. These categories are considered to have a more significant impact on the likelihood of accidents and offer more useful insights for road safety analysis.
+
+Star scheme including schema hierarchies:
 
 <img src="/Users/Kirill/Documents/GitHub/Data-Warehouse/Stars/Star.drawio.png" alt="Star.drawio" style="zoom:60%;" />
 
-Star scheme including schema hierarchies
+
 
 Concept hierarchies for dimensions shown below:
 
@@ -140,37 +142,33 @@ Concept Hierarchy - Vehicle invoved
 
 ### Schema, Starnet and query footprints
 
-Schema looks like:
+Schema shows the relationships between fact tables and dimension tables. For example, both fact tables have one common dimension table - location dimension table.
 
 ![ Schema](/Users/Kirill/Documents/GitHub/Data-Warehouse/Schema/ Schema.png)
 
-**Schema, Starnet and query footprints**: Provide and explain your StarNet diagrams and the query footprints. Discuss which schema you used and justify your choice with references.
-
-Implement a star or snowflake schema using PostgreSQL. For the fact table and dimension tables, clearly state which ones are measures and dimensions, and indicate the dimension references.
-
 ### Determine the grain at which facts can be stored.
 
-The first fact table fatalities_fact has no numeric measures so it is factless fact table, which will describe fatalities itself. Attributes for this fact table will be:
-crash_id - National crash identifying number
-victim_number - Victim number в дтп.
-lga_code - location dimension
-dateID - date dimension
-rushID - Rush hours dimension
-ageID - Age dimension
-daytimeID - Daytime dimension
-road_typeID - Road dimension
-speed_limitID - Speed dimension
-holidayID - Holiday dimension
-vehicle_typeID - Vehicle invoved dimension
+The first fact table is **fatalities_fact** table. It has no numeric measures so it is factless fact table, which will describe fatalities itself. Attributes for this fact table will be:
 
-The second fact table is population fact table with population measure. Attributes for this fact table will be:
-lga_code - location dimension.
-year - year, part of composite primary key.
-population - population measure.
+- **crash_id** - National crash identifying number.
+- **victim_number** - Victim number in the accident. Together with crash_id forms a composite Primary key.
+- **lga_code** - foreign key for location dimension.
+- **dateID** - foreign key for date dimension.
+- **rushID**- foreign key for Rush hours dimension.
+- **ageID** - foreign key for Age dimension.
+- **daytimeID** - foreign key for Daytime dimension.
+- **road_typeID** - foreign key for Road dimension.
+- **speed_limitID** - foreign key for Speed dimension.
+- **holidayID** - foreign key for Holiday dimension.
+- **vehicle_typeID** - foreign key for Vehicle invoved dimension.
 
+The second fact table is **population_fact** table with population measure. Attributes for this fact table will be:
 
+- **lga_code** - foreign key for location dimension.
+- **year** - year when event occurred. Together with lga_code forms a composite Primary key.
+- **population** - population measure.
 
-Use the StarNet footprints to illustrate how the business queries can be answered with your design. 
+Below are StarNet footprints to illustrate how the business queries can be answered with our Data Warehouse design. 
 
 1. What is the total number of road fatalities by state, and year?
 
@@ -181,8 +179,6 @@ Use the StarNet footprints to illustrate how the business queries can be answere
 <img src="/Users/Kirill/Documents/GitHub/Data-Warehouse/Stars/Star_q2.drawio.png" style="zoom:67%;" />
 
  
-
-
 
 3. How many road crashes occurred during holidays in each state in 2024?
 
@@ -204,14 +200,14 @@ Use the StarNet footprints to illustrate how the business queries can be answere
 
 ### Extraction
 
-Importing libraries
+Importing libraries.
 
 ```import pandas as pd
 import pandas as pd
 import numpy as np
 ```
 
-Reading Files
+Reading Files.
 
 ```
 # # Ensure the required library is installed 
@@ -228,7 +224,7 @@ population = pd.read_excel(file_path, sheet_name="Table 1", skiprows=5)
 
 ### Transformation
 
-Changing column names for convinience
+Changing column names for convinience.
 
 ```
 # Clean the columnnames
@@ -263,7 +259,7 @@ cols.insert(1, cols.pop(cols.index('victim_number')))
 df = df[cols]
 ```
 
-Drop unnessasary columns
+Drop unnessasary columns.
 
 ```
 df.drop(columns=['age', 'gender', 'national_remoteness_areas', 'sa4_name_2021', 'day_of_week'], inplace=True)
@@ -326,7 +322,7 @@ Values that cannot be converted to int:
 df['speed_limit'] = df['speed_limit'].replace('<40', 40)
 ```
 
-Categorising road **speed limits** into 4 categories. According to local rules in NT state speed limit in build-up areas is 60 km/h, while in other states is 50 km/h. We sel "Low" for low speed zones 0-40 km/h, "Med" for 41-60 in NT and 41-50 in other states, 'High' fof 61-80 in NT and 51-80 in other states, and 'Very High' for 81 and upper for all states.
+Categorising road **speed limits** into 4 categories. According to local rules in NT state speed limit in build-up areas is 60 km/h, while in other states is 50 km/h. We set "Low" for low speed zones 0-40 km/h, "Med" for 41-60 in NT and 41-50 in other states, 'High' fof 61-80 in NT and 51-80 in other states, and 'Very High' for 81 and upper for all states.
 
 ```
 df['speed_limit'] = np.where(
@@ -444,7 +440,7 @@ lga_code	lga_name	year	population
 
 #### Designing dimention tables
 
-To design location dimension table we should add lag_code to our data in fatalities table. We merge df and population table. After that we found out that some LGA names are different in fatalities table and population table (for example, Armidale and Armidale Regional). For these values we serch for matching in first word and change the LGA name in fact table, so they can match population table and will not lead to NaN values.
+To design the location dimension table, we needed to add  lga_code` to the data in the fatalities table. We merged the fatalities dataframe with the population table. After that, we discovered that some LGA names differed between the fatalities table and the population table (for example, *Armidale* vs. *Armidale Regional*). For these mismatches, we searched for matches based on the first word and updated the LGA names in the fact table so they would match the population table and avoid resulting in NaN values.
 
 ```
 df = df.merge(population_long[['lga_name', 'lga_code']].drop_duplicates(), on='lga_name', how='left')
@@ -583,7 +579,7 @@ vehicle_type_dim
 
 #### Saving tables
 
-Save all dimension tables to csv files
+Save all dimension tables to csv files.
 
 ```
 dimension_tables = {
@@ -604,7 +600,7 @@ for name, table in dimension_tables.items():
     print(f"{name} data saved to {output_file_path}")
 ```
 
-Save the cleaned DataFrame for Algorithm Rule Mining
+Save the cleaned DataFrame for Algorithm Rule Mining.
 
 ```
 df_cleaned = df.copy()
@@ -658,9 +654,7 @@ for name, table in fact_tables.items():
 
 #### Load tables to PostgreSQL
 
-_______________ - explain how to create DW
-
-In the DW we create new database Project_1 and Create table with SQL queries:
+In the Data Warehouse we create new database Project_1 and create tables with SQL queries:
 
 ```
 -- DROP ALL TABLES
@@ -742,8 +736,6 @@ CREATE TABLE IF NOT EXISTS population_fact (
     population INT,
     FOREIGN KEY (lga_code) REFERENCES location_dim(lga_code),
     PRIMARY KEY (lga_code, year)
-
-
 );
 
 -- create fatalities fact table 
@@ -799,11 +791,120 @@ COPY fatalities_fact FROM '/tmp/fatalities_fact.csv' WITH (FORMAT CSV, HEADER TR
 COPY population_fact FROM '/tmp/population_fact.csv' WITH (FORMAT CSV, HEADER TRUE);
 ```
 
-**Data cleaning, preprocessing, and ETL process**: Describe your ETL process in detail. Include descriptions of the techniques used, discuss your ETL principles, explain the reasoning behind the key steps, and provide screenshots illustrating the process flow with references. 
-
-NOTE: During the ETL process, you may remove some rows from the dataset. However, the number of dropped rows should not exceed 5% of the total dataset. Removing too many rows will result in a low mark for the ETL section. 
-
 ## Visualisation
+
+SQL-scripts for business-queries:
+
+1. What is the total number of road fatalities by LGA, state, and year?
+
+```
+SELECT 
+    d.year,
+    l.state,
+    COUNT(*) AS total_fatalities
+FROM fatalities_fact f
+JOIN date_dim d ON f.dateID = d.dateID
+JOIN location_dim l ON f.lga_code = l.lga_code
+
+GROUP BY ROLLUP (d.year, l.state);
+```
+
+2. How many road crashes involving heavy vehicles occurred during the day and night across each state?
+
+```
+SELECT 
+    l.state,
+    d.time_of_day,
+    COUNT(*) AS total_crashes
+FROM fatalities_fact f
+JOIN location_dim l ON f.lga_code = l.lga_code
+JOIN daytime_dim d ON f.daytimeID = d.daytimeID
+JOIN vehicle_type_dim v ON f.vehicle_typeID = v.vehicle_typeID
+WHERE v.vehicle_type_involved = 'Heavy Vehicle Involved'
+GROUP BY l.state, d.time_of_day
+ORDER BY l.state, d.time_of_day;
+```
+
+3. How many road crashes occurred during holidays in each state in 2024?
+
+```
+SELECT 
+    l.state,
+    h.holiday_type,
+    COUNT(*) AS total_crashes
+FROM fatalities_fact f
+JOIN location_dim l ON f.lga_code = l.lga_code
+JOIN holiday_dim h ON f.holidayID = h.holidayID
+JOIN date_dim d ON f.dateID = d.dateID
+WHERE d.year = 2024
+AND h.holiday_type = 'Holiday'
+GROUP BY l.state, h.holiday_type
+ORDER BY total_crashes DESC;
+```
+
+4. Which age group is most frequently involved in road crashes during rush hours?
+
+```
+SELECT 
+    a.age_group,
+    COUNT(*) AS total_crashes
+FROM fatalities_fact f
+JOIN rush_dim r ON f.rushID = r.rushID
+JOIN age_dim a ON f.ageID = a.ageID
+WHERE r.time_cat = 'Rush'
+GROUP BY a.age_group
+ORDER BY total_crashes DESC;
+```
+
+5. How many road crashes occurred at each speed limit in each Australian state during the year 2024?
+
+```
+SELECT 
+    l.state,
+    s.speed_limit,
+    COUNT(*) AS total_crashes
+FROM fatalities_fact f
+JOIN location_dim l ON f.lga_code = l.lga_code
+JOIN speed_limit_dim s ON f.speed_limitID = s.speed_limitID
+JOIN date_dim d ON f.dateID = d.dateID
+WHERE d.year = 2024
+GROUP BY l.state, s.speed_limit
+ORDER BY l.state, total_crashes DESC;
+```
+
+6. What is the road fatality rate per 100,000 people by state in the year 2020?
+
+```
+WITH population_per_state AS (
+    SELECT 
+        l.state,
+        SUM(p.population) AS total_population
+    FROM population_fact p
+    JOIN location_dim l ON p.lga_code = l.lga_code
+    WHERE p.year = 2020
+    GROUP BY l.state
+),
+fatalities_per_state AS (
+    SELECT 
+        l.state,
+        COUNT(f.crash_ID) AS total_deaths
+    FROM fatalities_fact f
+    JOIN location_dim l ON f.lga_code = l.lga_code
+    JOIN date_dim d ON f.dateID = d.dateID
+    WHERE d.year = 2020
+    GROUP BY l.state
+)
+SELECT 
+    pps.state,
+    pps.total_population,
+    fps.total_deaths,
+    ROUND(fps.total_deaths * 100000.0 / NULLIF(pps.total_population, 0), 2) AS fatalities_per_100k
+FROM population_per_state pps
+JOIN fatalities_per_state fps ON pps.state = fps.state
+ORDER BY fatalities_per_100k DESC;
+```
+
+
 
 **Visual**
 Use PostgreSQL to build a multi-dimensional analysis service solution, with a cube designed to answer your business queries. Make sure the concept hierarchies match your StarNet design.
@@ -817,3 +918,11 @@ Use Power BI/Tableau to visualise the data returned from your business queries.
 ## Association rules mining
 
 **Association rules mining**: See the Association Rules Mining section above. 
+
+In the submitted PDF, you need to:
+
+- Explain and discuss which association rules mining algorithms were used with references.
+- Explain the top k rules (where k ≥ 1) that have "**Road User**" on the right-hand side, ranked by lift and confidence.
+- Explain the meaning of these k rules in plain English.
+- Share insights derived from the mining results. If no meaningful rules are discovered, explore potential reasons for this outcome.
+- Based on the rules, provide and explain at least THREE (3) recommendations to the government on how to improve road safety for road users.
