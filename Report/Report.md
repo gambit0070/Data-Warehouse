@@ -4,8 +4,6 @@ Project 1 submitted by
 Butakov Kirill, Student ID: 24620697 
 ________, Student ID: ______.
 
-Member Contribution: ________
-
 The overall objectives of this project are to build a data warehouse using real-world datasets and to carry out a basic data mining activity, in this case, association rule mining.
 
 ## Datasets and Problem Domain
@@ -795,7 +793,7 @@ COPY population_fact FROM '/tmp/population_fact.csv' WITH (FORMAT CSV, HEADER TR
 
 SQL-scripts for business-queries:
 
-1. What is the total number of road fatalities by LGA, state, and year?
+1. What is the total number of road fatalities by state and year?
 
 ```
 SELECT 
