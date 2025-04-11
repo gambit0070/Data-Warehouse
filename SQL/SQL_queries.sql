@@ -1,13 +1,4 @@
-### SQL-queries
-
-1. Количество смертей по LGA штатам и годам Roll Up
-2. Количество ДТП по штатам днем и ночью c участием Heavy vehicle
-3. Количество ДТП в праздники по штатам в 2024.
-4. Какая возрастная категория больше попадает в ДТП в RUSH hours.
-5. В 2024 разбивка количества аварий по штатам и скоростным режимам.
-6. Какая смертность на 100000 человек по штатам в 2020 году
-
-1. What is the total number of road fatalities by state, and year?
+-- 1. What is the total number of road fatalities by state and year?
 
 SELECT 
     d.year,
@@ -17,11 +8,9 @@ FROM fatalities_fact f
 JOIN date_dim d ON f.dateID = d.dateID
 JOIN location_dim l ON f.lga_code = l.lga_code
 
-GROUP BY ROLLUP (d.year, l.state)
-ORDER BY total_fatalities DESC;
+GROUP BY ROLLUP (d.year, l.state);
 
-
-2. How many road crashes involving heavy vehicles occurred during the day and night across each state?
+-- 2. How many road crashes involving heavy vehicles occurred during the day and night across each state?
 
 SELECT 
     l.state,
@@ -50,7 +39,7 @@ AND h.holiday_type = 'Holiday'
 GROUP BY l.state, h.holiday_type
 ORDER BY total_crashes DESC;
 
-4. Which age group is most frequently involved in road crashes during rush hours?
+-- 4. Which age group is most frequently involved in road crashes during rush hours?
 
 SELECT 
     a.age_group,
@@ -62,7 +51,7 @@ WHERE r.time_cat = 'Rush'
 GROUP BY a.age_group
 ORDER BY total_crashes DESC;
 
-5. How many road crashes occurred at each speed limit in each Australian state during the year 2024?
+-- 5. How many road crashes occurred at each speed limit in each Australian state during the year 2024?
 
 SELECT 
     l.state,
@@ -76,7 +65,7 @@ WHERE d.year = 2024
 GROUP BY l.state, s.speed_limit
 ORDER BY l.state, total_crashes DESC;
 
-6. What is the road fatality rate per 100,000 people by state in the year 2020?
+-- 6. What is the road fatality rate per 100,000 people by state in the year 2020?
 
 WITH population_per_state AS (
     SELECT 
