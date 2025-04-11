@@ -5,7 +5,7 @@
 3. Количество ДТП в праздники по штатам в 2024.
 4. Какая возрастная категория больше попадает в ДТП в RUSH hours.
 5. В 2024 разбивка количества аварий по штатам и скоростным режимам.
-6. Какая смертность на 100000 человек в WA в 2024 году
+6. Какая смертность на 100000 человек по штатам в 2020 году
 
 1. What is the total number of road fatalities by state, and year?
 
@@ -75,3 +75,33 @@ JOIN date_dim d ON f.dateID = d.dateID
 WHERE d.year = 2024
 GROUP BY l.state, s.speed_limit
 ORDER BY l.state, total_crashes DESC;
+
+6. Какая смертность на 100000 человек по штатам в 2020 году
+
+WITH population_per_state AS (
+    SELECT 
+        l.state,
+        SUM(p.population) AS total_population
+    FROM population_fact p
+    JOIN location_dim l ON p.lga_code = l.lga_code
+    WHERE p.year = 2020
+    GROUP BY l.state
+),
+fatalities_per_state AS (
+    SELECT 
+        l.state,
+        COUNT(f.crash_ID) AS total_deaths
+    FROM fatalities_fact f
+    JOIN location_dim l ON f.lga_code = l.lga_code
+    JOIN date_dim d ON f.dateID = d.dateID
+    WHERE d.year = 2020
+    GROUP BY l.state
+)
+SELECT 
+    pps.state,
+    pps.total_population,
+    fps.total_deaths,
+    ROUND(fps.total_deaths * 100000.0 / NULLIF(pps.total_population, 0), 2) AS fatalities_per_100k
+FROM population_per_state pps
+JOIN fatalities_per_state fps ON pps.state = fps.state
+ORDER BY fatalities_per_100k DESC;
