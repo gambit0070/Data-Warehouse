@@ -1,27 +1,24 @@
 ### SQL-queries
 
-1. Какая смертность на 1000 человек от ДТП в Перте за последние 10 лет
+1. Количество смертей по LGA штатам и годам Roll Up
 2. Количество ДТП по штатам днем и ночью c участием Heavy vehicle
 3. Количество ДТП в праздники по штатам в 2024.
 4. Какая возрастная категория больше попадает в ДТП в RUSH hours.
 5. В 2024 разбивка количества аварий по штатам и скоростным режимам.
+6. Какая смертность на 100000 человек в WA в 2024 году
 
-1. How do road fatality rates per 1,000 people vary across different geographic levels (State → LGA) and time periods (Year → Month), and where are the highest concentrations of fatalities relative to population?
+1. What is the total number of road fatalities by state, and year?
 
 SELECT 
     d.year,
-    d.month,
     l.state,
-    l.lga_name,
-    COUNT(*) AS total_fatalities,
-    MAX(p.population) AS total_population,
-    ROUND(COUNT(*) * 1000.0 / NULLIF(MAX(p.population), 0), 2) AS fatalities_per_1000
+    COUNT(*) AS total_fatalities
 FROM fatalities_fact f
 JOIN date_dim d ON f.dateID = d.dateID
 JOIN location_dim l ON f.lga_code = l.lga_code
-JOIN population_fact p ON f.lga_code = p.lga_code AND d.year = p.year
-GROUP BY d.year, d.month, l.state, l.lga_name
-ORDER BY fatalities_per_1000 DESC;
+
+GROUP BY ROLLUP (d.year, l.state)
+ORDER BY total_fatalities DESC;
 
 
 2. How many road crashes involving heavy vehicles occurred during the day and night across each state?

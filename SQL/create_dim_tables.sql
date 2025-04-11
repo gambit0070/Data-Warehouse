@@ -75,12 +75,8 @@ CREATE TABLE IF NOT EXISTS population_fact (
     lga_code INT,
     year INT,
     population INT,
-    -- foreign keys
     FOREIGN KEY (lga_code) REFERENCES location_dim(lga_code),
-    -- primary key
     PRIMARY KEY (lga_code, year)
-
-
 );
 
 -- create fatalities fact table 
@@ -96,8 +92,6 @@ CREATE TABLE IF NOT EXISTS fatalities_fact(
     speed_limitID INT,
     holidayID INT,
     vehicle_typeID INT,
-    -- WHAT IS OUR MEASURE? OR we have FACTLESS FACT TABLE?
-    -- foreign keys
     FOREIGN KEY (lga_code) REFERENCES location_dim(lga_code),
     FOREIGN KEY (dateID) REFERENCES date_dim(dateID),
     FOREIGN KEY (rushID) REFERENCES rush_dim(rushID),
@@ -107,5 +101,4 @@ CREATE TABLE IF NOT EXISTS fatalities_fact(
     FOREIGN KEY (speed_limitID) REFERENCES speed_limit_dim(speed_limitID),
     FOREIGN KEY (holidayID) REFERENCES holiday_dim(holidayID),
     FOREIGN KEY (vehicle_typeID) REFERENCES vehicle_type_dim(vehicle_typeID),
-    -- primary key
     PRIMARY KEY (crash_ID, victim_number)
